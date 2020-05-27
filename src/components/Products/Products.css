@@ -1,0 +1,19 @@
+@media (min-width:600px) {
+    .Products {
+        margin: 0 auto;
+        width: auto;
+        height: auto;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (min-width:800px) {
+    .Products {
+        margin: auto;
+        width: auto;
+        height: auto;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+}
