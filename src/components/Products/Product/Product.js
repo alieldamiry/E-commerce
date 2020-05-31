@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Product.css';
 import { FaCartPlus } from "react-icons/fa";
 import { BsInfoSquareFill } from "react-icons/bs";
-import ProductDetails from '../../UI/ProductDetails/ProductDetails';
 
 const Product = (props) => {
 
@@ -10,8 +9,8 @@ const Product = (props) => {
 
     return (
         <div className={classes.Product}>
-            
-            <img className={classes.img} src={testedSource} />
+
+            <img className={classes.img} src={testedSource} alt={props.productName} />
             <div className={classes.naming}>
                 <p>{props.productName}</p>
                 <p><strong>{props.price}$</strong></p>
@@ -19,9 +18,11 @@ const Product = (props) => {
             <div className={classes.Overlay}>
                 <div className={classes.iconsContainer}>
                     <FaCartPlus className={classes.icon}
-                        onClick={() => alert('added to Cart')} color="white" size="4.5rem" />
+                        onClick={props.addToCart}
+                        color="white" size="4.5rem" />
                     <BsInfoSquareFill className={classes.icon}
-                        onClick={props.clicked} color="white" size="4rem" />
+                        onClick={props.productModalClicked}
+                        color="white" size="4.4rem" />
                 </div>
             </div>
         </div>

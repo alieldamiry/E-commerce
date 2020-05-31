@@ -1,0 +1,51 @@
+.CartNotification {
+    width: 90%;
+    height: 150px;
+    box-sizing: border-box;
+    text-align: left;
+    left: 5%;
+    text-align: center;
+    color: rgb(22, 22, 22);
+    box-shadow: 2px 2px 10px grey;
+    padding: 16px;
+    background-color: #fff;
+    position: fixed;
+    top: 60px;
+    border-radius: 4px;
+    z-index: 1;
+    transition: all 0.7s ease-out;
+}
+
+@media (min-width: 600px) {
+    .CartNotification {
+        width: 45%;
+        left: 55%;
+    }
+}
+
+.Btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Btn {
+    color: #007EC7;
+    background-color: #fff;
+    padding: 8px;
+    margin: 0 8px;
+    border: 2px solid #007EC7;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px grey;
+}
+
+.Btn:hover {
+    box-shadow: 1px 1px 8px grey;
+}
+
+.greenBtn {
+    color: #fff;
+    border: 2px solid #5CB85C;
+    background-color: #5CB85C;
+    text-decoration: none;
+}

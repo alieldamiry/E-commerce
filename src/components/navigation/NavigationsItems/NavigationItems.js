@@ -9,8 +9,7 @@ const navigationItems = () => {
             <NavigationItem exact link="/">Home</NavigationItem>
             <NavigationItem link="/fashion">Fashion</NavigationItem>
             <NavigationItem link="/electronics">Electronics</NavigationItem>
-            <NavigationItem link="/appliances">Appliances</NavigationItem>
-            <NavigationItem link="/Cart"><FaShoppingCart size="1.5rem" /> </NavigationItem>
+            <NavigationItem link="/cart"> <FaShoppingCart size="1.5rem" /> </NavigationItem>
         </ul>
     );
 };
