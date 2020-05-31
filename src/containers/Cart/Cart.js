@@ -3,20 +3,23 @@ import classes from './Cart.css';
 
 class Cart extends Component {
     componentDidMount() {
-        console.log(this.props);
         this.props.closeNotification();
     }
 
     render() {
-        console.log(this.props.products);
-        const products = this.props.products.map(product => <h1>{product.name}</h1>)
+        let orderedProducts = <div className={classes.cartEmpty}>
+            <h2>Cart is empty!</h2>
+            <p>You haven't ordered any items</p>
+            <div className={classes.Btn}
+                onClick={() => window.history.back()}>Continue shopping</div>
+        </div>;
+        if (this.props.products.length !== 0) {
+            orderedProducts = this.props.products.map(product => <h1 key={product.name}>{product.name}</h1>);
+        }
         return (
-            <div>
-                <div className={classes.m}>
-                    <h1>Cart is empty!</h1>
-                    <p>You haven't ordered any item</p>
-                </div>
-            </div>
+            <React.Fragment>
+                
+            </React.Fragment>
         );
     }
 }

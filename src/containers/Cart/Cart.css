@@ -1,6 +1,18 @@
-.m {
-    text-align: center;
-    width: 100%;
-    margin: auto;
+.cartEmpty {
+    margin-top: 150px;
 }
 
+.Btn {
+    margin-top: 50px;
+    color: rgb(235, 253, 235);
+    width: 200px;
+    background-color: #5CB85C;
+    padding: 8px;
+    margin: 30px auto;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px grey;
+}
+
+.Btn:hover {
+    box-shadow: 1px 1px 8px grey;
+}

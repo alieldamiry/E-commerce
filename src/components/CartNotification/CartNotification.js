@@ -3,8 +3,6 @@ import classes from './CartNotification.css';
 import { NavLink } from 'react-router-dom';
 
 const CartNotification = (props) => {
-    console.log(props.notificationState);
-
     return (
         <div className={classes.CartNotification}
             style={{

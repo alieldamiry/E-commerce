@@ -25,18 +25,7 @@ class Products extends Component {
             .then(res => {
                 this.setState({ productsStored: Object.values(res.data) });
             });
-            console.log('its mounted heeeeeey');
     }
-    // componentDidUpdate() {
-    //     console.log('its updated heeeeeey');
-        
-    //     axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
-    //         .then(res => {
-    //             if (JSON.stringify(this.state.productsStored) !== JSON.stringify(Object.values(res.data))) {
-    //                 this.setState({ productsStored: Object.values(res.data) });
-    //             }
-    //         });
-    // }
 
     productClickedHandler = (product) => {
         this.setState({ productClicked: product, showProductModal: true });
