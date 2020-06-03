@@ -16,10 +16,6 @@ class Products extends Component {
         showProductModal: false
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextProps.Category !== this.props.Category || nextState !== this.state;
-    // }
-
     componentDidMount() {
         axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
             .then(res => {
@@ -34,10 +30,6 @@ class Products extends Component {
     closeProductModalHandler = () => {
         this.setState({ showProductModal: false });
     }
-
-
-
-
 
     render() {
         let products = null;
@@ -58,7 +50,6 @@ class Products extends Component {
 
         return (
             <Aux>
-
                 <ProductModal
                     closeProductModal={this.closeProductModalHandler}
                     show={this.state.showProductModal}
