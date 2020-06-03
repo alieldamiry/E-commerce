@@ -25,6 +25,17 @@ class App extends Component {
   closeCartNotification = () => {
     this.setState({ showCartNotification: false });
   }
+  changeQuantityHandler = (event, item) => {
+    let orderedProducts = [...this.state.orderedProducts];
+    orderedProducts.find(product => product.name === item.name).quantity = Number(event.target.value);
+    this.setState({ orderedProducts: orderedProducts });
+  }
+
+  deleteItemHandler = (item) => {
+    let orderedProducts = this.state.orderedProducts.filter(el => el !== item);
+    this.setState({ orderedProducts: orderedProducts });
+
+  }
 
   render() {
     const categories = ['fashion', 'electronics'];
@@ -35,9 +46,13 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Layout>
-           <CartNotification notificationState={this.state.showCartNotification} closeNotification={this.closeCartNotification} />
+          <CartNotification notificationState={this.state.showCartNotification} closeNotification={this.closeCartNotification} />
           <Switch>
-            <Route path="/cart" render={() => <Cart closeNotification={this.closeCartNotification} products={this.state.orderedProducts} />} />
+            <Route path="/cart" render={() =>
+              <Cart closeNotification={this.closeCartNotification}
+                products={this.state.orderedProducts}
+                deleteItem={(item) => this.deleteItemHandler(item)}
+                changeQuantity={(event, item) => this.changeQuantityHandler(event, item)} />} />
             {routingCategories}
             <Route path="/" render={() => <h1>Home page</h1>} />
           </Switch>

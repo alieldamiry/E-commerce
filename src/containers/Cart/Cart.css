@@ -1,5 +1,56 @@
-.cartEmpty {
+.CartEmpty {
     margin-top: 150px;
+}
+
+.Container {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    width: 95%;
+    border: 1px solid #eee;
+    text-align: left;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 10px;
+    margin: auto;
+}
+
+@media (min-width: 750px) {
+    .MainContainer {
+        padding: 5%;
+    }
+    .SummaryContainer {
+        position: fixed;
+        width: 30%;
+        top:130px;
+        right:5%;
+    }
+}
+.SummaryContainer {
+    text-align: center;
+    margin-top: 10px;
+    
+}
+
+.CartSummary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 10px;
+}
+
+.SummaryDiv {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    padding: 10px;
+}
+
+.Checkout {
+    grid-column: 1/3;
+    padding: 15px;
+    box-sizing: border-box;
+    margin: 10px auto;
+    cursor: pointer;
+    background-color: #91CE3F;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 .Btn {
