@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Products.css';
 import Product from './Product/Product';
-import Aux from '../../hoc/Auxiliary/Auxiliary';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
 import ProductModal from '../UI/ProductModal/ProductModal';
@@ -49,7 +48,7 @@ class Products extends Component {
 
 
         return (
-            <Aux>
+            <React.Fragment>
                 <ProductModal
                     closeProductModal={this.closeProductModalHandler}
                     show={this.state.showProductModal}
@@ -58,7 +57,7 @@ class Products extends Component {
                 <div className={productsStyle}>
                     {products}
                 </div>
-            </Aux>
+            </React.Fragment>
         );
     }
 }
