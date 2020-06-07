@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import classes from './Cart.css';
 import CartItems from '../../components/CartItems/CartItems';
 import CartItem from '../../components/CartItems/CartItem/CartItem';
-
 
 class Cart extends Component {
     state = {
         quantity: 1
     }
+    componentDidUpdate(prevProps) {
+        this.props.calculateTotalPrice();
+    }
     componentDidMount() {
         this.props.closeNotification();
     }
     render() {
-        let totalPrice = this.props.products.reduce((prev, cur) => {
-            return prev + cur.price * cur.quantity;
-        }, 0);
 
         let orderedProducts = <div className={classes.CartEmpty}>
             <h2>Cart is empty!</h2>
@@ -36,13 +36,13 @@ class Cart extends Component {
                 <div className={[classes.Container, classes.SummaryContainer].join(' ')}>
                     <div className={classes.CartSummary}>
                         <div className={classes.SummaryDiv}><strong>Subtotal</strong></div>
-                        <div className={classes.SummaryDiv}>{totalPrice.toFixed(2)} $</div>
+                        <div className={classes.SummaryDiv}>{this.props.totalPrice.toFixed(2)} $</div>
                         <div className={classes.SummaryDiv}><strong>Tax (10%)</strong></div>
-                        <div className={classes.SummaryDiv}>{(.1 * totalPrice).toFixed(2)} $</div>
+                        <div className={classes.SummaryDiv}>{(.1 * this.props.totalPrice).toFixed(2)} $</div>
                         <div className={classes.SummaryDiv}><strong>Total</strong></div>
-                        <div className={classes.SummaryDiv}>{(.1 * totalPrice + totalPrice).toFixed(2)} $</div>
+                        <div className={classes.SummaryDiv}>{(.1 * this.props.totalPrice + this.props.totalPrice).toFixed(2)} $</div>
                     </div>
-                    <div className={classes.Checkout}>Proceed to Checkout</div>
+                    <div className={classes.ProceedToCheckout}><Link to="/checkout" >Proceed to Checkout</Link></div>
                 </div>
             </div>;
         }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import classes from './CartItem.css';
@@ -22,7 +22,7 @@ const CartItem = (props) => {
                     className={classes.Numbers}
                     value={props.CartItem.quantity}
                     onChange={(event) => props.changeQuantity(event)}>
-                    {['1', '2', '3', '5', '6', '7', '8', '9', '10']
+                    {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
                         .map(el => <option key={el} value={el}>{el}</option>)}
                 </select>
             </div>

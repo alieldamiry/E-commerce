@@ -41,7 +41,7 @@
     padding: 10px;
 }
 
-.Checkout {
+.ProceedToCheckout {
     grid-column: 1/3;
     padding: 15px;
     box-sizing: border-box;
@@ -51,6 +51,11 @@
     color: #fff;
     font-size: 17px;
     font-weight: bold;
+}
+
+.ProceedToCheckout a{
+    text-decoration: none;
+    color:inherit;
 }
 
 .Btn {

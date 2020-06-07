@@ -1,0 +1,48 @@
+.Checkout {
+    background-color: #fff;
+    margin: 20px auto;
+    width: 95%;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.orderSummary {
+    padding: 10px;
+    background-color: #eee;
+    margin: auto;
+    width: 92%;
+}
+.ProductsSummary{
+    text-align: left;
+    font-size: 0.8rem;
+}
+.ProductsSummary div{
+    padding:2px 0;
+}
+
+.Input {
+    display: block;
+}
+
+.OrderButton {
+    padding: 10px 30px;
+    color: #fff;
+    background-color: #91CE3F;
+    border: none;
+    cursor: pointer;
+}
+
+.OrderButton:disabled {
+    background-color: #ccc;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+@media (min-width:600px) {
+    .Checkout {
+        width: 500px;
+    }
+}
