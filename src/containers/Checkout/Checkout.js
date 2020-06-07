@@ -3,6 +3,7 @@ import Input from '../../components/UI/Input/Input';
 import classes from './Checkout.css';
 import axios from 'axios';
 import { withRouter } from "react-router";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Checkout extends Component {
     state = {
@@ -94,6 +95,7 @@ class Checkout extends Component {
     //     return this.props.state.showCheckout;
     // }
     orderHandler = () => {
+        this.setState({ loading: true });
         let orderedProducts = {};
         this.props.state.orderedProducts.forEach(item =>
             orderedProducts[item.name] = {
@@ -113,6 +115,7 @@ class Checkout extends Component {
 
         axios.post('https://e-commerce-9417b.firebaseio.com/orders.json', order)
             .then(res => {
+                this.setState({ loading: false });
                 this.props.history.push('/');
             }).catch(res => {
                 alert(res);
@@ -166,8 +169,10 @@ class Checkout extends Component {
         let productsSummary = this.props.state.orderedProducts.map(item =>
             <div key={item.name}>({item.quantity}) x {item.name}: <strong>{item.price * item.quantity}$</strong> </div>
         );
-        return (
-            <div className={classes.Checkout}>
+
+        let checkout = <Spinner />;
+        if (!this.state.loading) {
+            checkout = <div className={classes.Checkout}>
                 <h4>Enter Your Contact Data</h4>
                 <div className={classes.orderSummary}>
                     <div className={classes.ProductsSummary}>
@@ -175,7 +180,6 @@ class Checkout extends Component {
                         <div>Tax (10%) : <strong>{0.1 * this.props.state.totalPrice}$</strong></div>
                     </div>
                     <div><strong>Total: {0.1 * this.props.state.totalPrice + this.props.state.totalPrice}$</strong></div>
-                    
                 </div>
                 <form onSubmit={this.orderHandler}>
                     {formElementsArray.map(formElement => (
@@ -191,7 +195,13 @@ class Checkout extends Component {
                     ))}
                     <button className={classes.OrderButton} disabled={!this.state.formIsValid}>ORDER</button>
                 </form>
-            </div >
+            </div >;
+        }
+
+        return (
+            <React.Fragment>
+                {checkout}
+            </React.Fragment>
         );
     }
 }
