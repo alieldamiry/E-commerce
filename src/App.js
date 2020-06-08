@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import Cart from './containers/Cart/Cart';
 import CartNotification from './components/CartNotification/CartNotification';
 import Checkout from './containers/Checkout/Checkout';
+import Home from './containers/Home/Home';
 
 class App extends Component {
   state = {
@@ -73,7 +74,7 @@ class App extends Component {
                 changeQuantity={(event, item) => this.changeQuantityHandler(event, item)} />} />
             {routingCategories}
             <Route path={'/checkout'} render={() => <Checkout state={this.state} />} />
-            <Route path="/" render={() => <h1>Home page</h1>} />
+            <Route path="/" render={() => <Home />} />
           </Switch>
         </Layout>
       </div>
