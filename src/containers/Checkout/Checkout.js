@@ -91,9 +91,6 @@ class Checkout extends Component {
         formIsValid: false,
         loading: false,
     }
-    // shouldComponentUpdate(){
-    //     return this.props.state.showCheckout;
-    // }
     orderHandler = () => {
         this.setState({ loading: true });
         let orderedProducts = {};
@@ -177,9 +174,9 @@ class Checkout extends Component {
                 <div className={classes.orderSummary}>
                     <div className={classes.ProductsSummary}>
                         {productsSummary}
-                        <div>Tax (10%) : <strong>{0.1 * this.props.state.totalPrice}$</strong></div>
+                        <div>Tax (10%) : <strong>{(0.1 * this.props.state.totalPrice).toFixed(2)}$</strong></div>
                     </div>
-                    <div><strong>Total: {0.1 * this.props.state.totalPrice + this.props.state.totalPrice}$</strong></div>
+                    <div><strong>Total: {(0.1 * this.props.state.totalPrice + this.props.state.totalPrice).toFixed(2)}$</strong></div>
                 </div>
                 <form onSubmit={this.orderHandler}>
                     {formElementsArray.map(formElement => (
