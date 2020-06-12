@@ -67,6 +67,7 @@
     margin: 30px auto;
     cursor: pointer;
     box-shadow: 1px 1px 3px grey;
+    transition: 150ms;
 }
 
 .Btn:hover {

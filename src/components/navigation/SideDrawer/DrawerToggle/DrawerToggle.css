@@ -13,8 +13,9 @@
 .DrawerToggle div {
     width: 90%;
     height: 3px;
-    background-color: white;
+    background-color: rgb(20, 20, 20);
 }
+
 
 @media (min-width: 500px) {
     .DrawerToggle {

@@ -3,11 +3,11 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.404);
+    border-bottom: 1px solid rgb(53, 53, 53);
 }
 
 .NavigationItem a {
-    color: #40A4C8;
+    color: rgb(97, 97, 97);
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
@@ -15,7 +15,7 @@
 }
 
 .NavigationItem a:hover, .NavigationItem a:active, .NavigationItem a.active {
-    color: #E2642B;
+    color: #007cc3;
 }
 
 @media (min-width: 500px) {
@@ -25,18 +25,16 @@
         height: 100%;
         width: auto;
         align-items: center;
+        border-bottom: none;
     }
     .NavigationItem a {
-        color: white;
+        color: rgb(20, 20, 20);
         height: 100%;
         padding: 16px 10px;
         border-bottom: 4px solid transparent;
+        transition: color 250ms;
     }
     .NavigationItem a:hover, .NavigationItem a.active {
-        background-color: rgba(64, 164, 200, 0.555);
-        border-bottom: 4px solid rgba(255, 251, 2, 0.63);
-        color: white;
-        transition: padding .2s ease-out;
-        padding: 13px;
+        color: #007cc3;
     }
 }
