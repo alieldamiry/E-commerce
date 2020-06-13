@@ -38,13 +38,13 @@ class Checkout extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'ZIP Code'
+                    placeholder: 'ZIP Code (must be 5 numbers)'
                 },
                 value: '',
                 validation: {
                     required: true,
                     minLength: 5,
-                    maxLength: 5
+                    maxLength: 5,
                 },
                 valid: false,
                 touched: false

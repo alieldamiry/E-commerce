@@ -33,6 +33,8 @@
     background-color: #91CE3F;
     border: none;
     cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
 }
 
 .OrderButton:disabled {

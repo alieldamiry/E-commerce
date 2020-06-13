@@ -17,15 +17,78 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
+.HeaderText h6 {
+    animation: slideInDown 1.7s ease;
+}
+
+.HeaderText h1 {
+    animation: zoomIn 1.7s ease;
+}
+
+.HeaderText h2 {
+    animation: bounceInLeft 1.7s ease-out;
+}
+
+/********** Key frames *********/
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes bounceInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-2000px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(30px);
+    }
+    80% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideInDown {
+    0% {
+        opacity: 0;
+        transform: translatey(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translatey(0);
+    }
+}
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translatey(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translatey(0);
+    }
+}
+/* *********** */
+
 .HeaderButton {
     border: 1px solid rgb(0, 0, 0);
     text-decoration: none;
     padding: 15px 20px;
     margin-top: 10px;
     background-color: #FAFAFA;
-    letter-spacing: 0.1rem;
     transition: 250ms;
     cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    animation: slideInUp 1.7s ease-out;
 }
 
 .HeaderButton:hover {
@@ -43,12 +106,12 @@
     }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 750px) {
     .Header {
         justify-content: space-around;
     }
     .HeaderText {
-        font-size: 27px;
+        font-size: 30px;
     }
     .HeaderImage {
         width: 30%;

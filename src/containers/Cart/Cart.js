@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Cart.css';
-import CartItems from '../../components/CartItems/CartItems';
-import CartItem from '../../components/CartItems/CartItem/CartItem';
+import CartItem from '../../components/CartItem/CartItem';
 
 class Cart extends Component {
     state = {
@@ -25,14 +24,12 @@ class Cart extends Component {
 
         if (this.props.products.length !== 0) {
             orderedProducts = <div className={classes.MainContainer}>
-                <CartItems>
                     {this.props.products.map(item =>
                         <CartItem
                             changeQuantity={(event) => this.props.changeQuantity(event, item)}
                             CartItem={item} key={item.name}
                             delete={() => this.props.deleteItem(item)}
                         />)}
-                </CartItems>
                 <div className={[classes.Container, classes.SummaryContainer].join(' ')}>
                     <div className={classes.CartSummary}>
                         <div className={classes.SummaryDiv}><strong>Subtotal</strong></div>
