@@ -6,13 +6,15 @@
     box-sizing: border-box;
     background-color: #fff;
     position: relative;
-    box-shadow: 4px 4px 10px  grey;
+    box-shadow: 4px 4px 10px  rgb(189, 189, 189);
+    border-radius: 5px;
 }
 
 .img {
     width: 100%;
     height: 200px;
     margin: auto;
+    border-radius: 5px;
 }
 
 .naming {
@@ -40,6 +42,7 @@
     right: 0;
     opacity: 0.9;
     transition: 300ms;
+    border-radius: 5px;
 }
 
 .iconsContainer {

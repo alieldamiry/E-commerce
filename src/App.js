@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import classes from './App.css';
-import Products from './components/Products/Products';
-import Layout from './containers/Layout/Layout';
+import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Cart from './containers/Cart/Cart';
+import classes from './App.css';
+import Layout from './containers/Layout/Layout';
+import Spinner from './components/UI/Spinner/Spinner';
 import CartNotification from './components/CartNotification/CartNotification';
-import Checkout from './containers/Checkout/Checkout';
 import Home from './containers/Home/Home';
+// import Checkout from './containers/Checkout/Checkout';
+const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
+// import Cart from './containers/Cart/Cart';
+const Cart = React.lazy(() => import('./containers/Cart/Cart'));
+// import Products from './components/Products/Products';
+const Products = React.lazy(() => import('./components/Products/Products'));
 
 class App extends Component {
   state = {
@@ -56,24 +60,36 @@ class App extends Component {
   render() {
     const categories = ['fashion', 'electronics'];
     const routingCategories = categories.map(c =>
-      <Route key={c} path={'/' + c} render={() =>
-        <Products addToCart={this.addToCartHandler} Category={c} />} />);
+      <Route key={c} path={'/' + c} render={() => (
+        <Suspense fallback={<Spinner />}>
+          <Products addToCart={this.addToCartHandler} Category={c} />
+        </Suspense>
+      )
+      } />);
 
     return (
       <div className={classes.App}>
         <Layout>
           <CartNotification notificationState={this.state.showCartNotification} closeNotification={this.closeCartNotification} />
           <Switch>
-            <Route path="/cart" render={() =>
-              <Cart
-                totalPrice={this.state.totalPrice}
-                calculateTotalPrice={this.calculateTotalPrice}
-                closeNotification={this.closeCartNotification}
-                products={this.state.orderedProducts}
-                deleteItem={(item) => this.deleteItemHandler(item)}
-                changeQuantity={(event, item) => this.changeQuantityHandler(event, item)} />} />
+            <Route path="/cart" render={() => (
+              <Suspense fallback={<Spinner />}>
+                <Cart
+                  totalPrice={this.state.totalPrice}
+                  calculateTotalPrice={this.calculateTotalPrice}
+                  closeNotification={this.closeCartNotification}
+                  products={this.state.orderedProducts}
+                  deleteItem={(item) => this.deleteItemHandler(item)}
+                  changeQuantity={(event, item) => this.changeQuantityHandler(event, item)} />
+              </Suspense>)
+            } />
+
             {routingCategories}
-            <Route path={'/checkout'} render={() => <Checkout state={this.state} />} />
+            <Route path={'/checkout'} render={() => (
+              <Suspense fallback={<Spinner />}>
+                <Checkout state={this.state} />
+              </Suspense>
+            )} />
             <Route path="/" render={() => <Home />} />
           </Switch>
         </Layout>

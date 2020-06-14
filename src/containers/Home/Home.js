@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Home.css';
-import imageSource from "../../assets/images/Chair.png";
+import imageSource from "../../assets/images/Chair.webp";
 
 
 const Home = (props) => {
@@ -15,7 +15,6 @@ const Home = (props) => {
                     <button className={classes.HeaderButton}><strong>SHOP NOW</strong></button>
                 </div>
             </div>
-            
         </div>
     );
 };
