@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import classes from './Products.css';
 import Product from './Product/Product';
 import axios from 'axios';
 import Spinner from '../UI/Spinner/Spinner';
-import ProductModal from '../UI/ProductModal/ProductModal';
+// import ProductModal from '../UI/ProductModal/ProductModal';
+const ProductModal = React.lazy(() => import('../UI/ProductModal/ProductModal'));
 
 class Products extends Component {
     state = {
@@ -49,10 +50,12 @@ class Products extends Component {
 
         return (
             <React.Fragment>
-                <ProductModal
-                    closeProductModal={this.closeProductModalHandler}
-                    show={this.state.showProductModal}
-                    product={this.state.productClicked} />
+                <Suspense fallback={<Spinner />}>
+                    <ProductModal
+                        closeProductModal={this.closeProductModalHandler}
+                        show={this.state.showProductModal}
+                        product={this.state.productClicked} />
+                </Suspense>
 
                 <div className={productsStyle}>
                     {products}

@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import Toolbar from '../../components/navigation/Toolbar/Toolbar';
-import SideDrawer from '../../components/navigation/SideDrawer/SideDrawer';
 import classes from './Layout.css'
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import Spinner from '../../components/UI/Spinner/Spinner';
+// import SideDrawer from '../../components/navigation/SideDrawer/SideDrawer';
+const SideDrawer = React.lazy(() => import('../../components/navigation/SideDrawer/SideDrawer'));
 
 class Layout extends Component {
     state = {
         showSideDrawer: false
-    }
-
-    componentDidMount() {
-        // console.log(this.props);
     }
 
     sideDrawerClosedHandler = () => {
@@ -27,8 +25,11 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
-                <SideDrawer open={this.state.showSideDrawer}
-                    closed={this.sideDrawerToggleHandler} />
+                <Suspense fallback={<Spinner />}>
+                    <SideDrawer open={this.state.showSideDrawer}
+                        closed={this.sideDrawerToggleHandler} />
+                </Suspense>
+
                 <main className={classes.Content}>
                     {this.props.children}
                     <div className={classes.Footer}>
