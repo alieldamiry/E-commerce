@@ -5,8 +5,7 @@ import Layout from './containers/Layout/Layout';
 import Spinner from './components/UI/Spinner/Spinner';
 // import CartNotification from './components/CartNotification/CartNotification';
 const CartNotification = React.lazy(() => import('./components/CartNotification/CartNotification'));
-// import Home from './containers/Home/Home';
-const Home = React.lazy(() => import('./containers/Home/Home'));
+import Home from './containers/Home/Home';
 // import Checkout from './containers/Checkout/Checkout';
 const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
 // import Cart from './containers/Cart/Cart';
@@ -95,9 +94,7 @@ class App extends Component {
               </Suspense>
             )} />
             <Route path="/" render={() =>
-              <Suspense fallback={<Spinner />}>
                 <Home />
-              </Suspense>
             } />
           </Switch>
         </Layout>
