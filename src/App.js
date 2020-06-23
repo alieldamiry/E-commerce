@@ -2,23 +2,22 @@ import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import classes from './App.css';
 import Layout from './containers/Layout/Layout';
+import Home from './containers/Home/Home';
 import Spinner from './components/UI/Spinner/Spinner';
 // import CartNotification from './components/CartNotification/CartNotification';
 const CartNotification = React.lazy(() => import('./components/CartNotification/CartNotification'));
-import Home from './containers/Home/Home';
 // import Checkout from './containers/Checkout/Checkout';
 const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
 // import Cart from './containers/Cart/Cart';
 const Cart = React.lazy(() => import('./containers/Cart/Cart'));
 // import Products from './components/Products/Products';
-const Products = React.lazy(() => import('./components/Products/Products'));
+const Products = React.lazy(() => import('./containers/Products/Products'));
 
 class App extends Component {
   state = {
     orderedProducts: [],
     totalPrice: 0,
-    showCartNotification: false,
-    showCheckout: false
+    showCartNotification: false
   }
 
   calculateTotalPrice = () => {

@@ -1,14 +1,14 @@
 import React, { Component, Suspense } from 'react';
+import { connect } from 'react-redux';
 import classes from './Products.css';
-import Product from './Product/Product';
+import Product from '../../components/Product/Product';
 import axios from 'axios';
-import Spinner from '../UI/Spinner/Spinner';
+import Spinner from '../../components/UI/Spinner/Spinner';
 // import ProductModal from '../UI/ProductModal/ProductModal';
-const ProductModal = React.lazy(() => import('../UI/ProductModal/ProductModal'));
+const ProductModal = React.lazy(() => import('../../components/UI/ProductModal/ProductModal'));
 
 class Products extends Component {
     state = {
-        productsStored: null,
         productClicked: {
             name: null,
             price: null
@@ -17,10 +17,14 @@ class Products extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
-            .then(res => {
-                this.setState({ productsStored: Object.values(res.data) });
-            });
+        console.log(this.props.productsStored);
+
+        //     axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
+        //         .then(res => {
+        //             console.log(res.data);
+        //             console.log(Object.values(res.data));
+        //             this.setState({ productsStored: Object.values(res.data) });
+        //         });
     }
 
     productClickedHandler = (product) => {
@@ -34,13 +38,14 @@ class Products extends Component {
     render() {
         let products = null;
         let productsStyle = null;
-        if (this.state.productsStored) {
-            products = this.state.productsStored.map(product =>
+        if (this.props.productsStored) {
+            products = this.props.productsStored.map(product =>
                 <Product
                     addToCart={() => this.props.addToCart(product)}
                     productModalClicked={() => { this.productClickedHandler(product) }}
                     price={product.price}
-                    key={product.name} productName={product.name} />
+                    key={product.name}
+                    productName={product.name} />
             );
             productsStyle = classes.Products;
         } else {
@@ -65,4 +70,11 @@ class Products extends Component {
     }
 }
 
-export default Products;
+
+const mapStateToProps = state => {
+    return {
+        productsStored: state.productsStored
+    }
+}
+
+export default connect(mapStateToProps)(Products);
