@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import classes from './Checkout.css';
 import axios from 'axios';
@@ -6,6 +7,9 @@ import { withRouter } from "react-router";
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Checkout extends Component {
+    componentDidMount(){
+        console.log(this.props);   
+    }
     state = {
         orderForm: {
             name: {
@@ -162,11 +166,9 @@ class Checkout extends Component {
                 config: this.state.orderForm[key],
             });
         }
-
         let productsSummary = this.props.state.orderedProducts.map(item =>
             <div key={item.name}>({item.quantity}) x {item.name}: <strong>{item.price * item.quantity}$</strong> </div>
         );
-
         let checkout = <Spinner />;
         if (!this.state.loading) {
             checkout = <div className={classes.Checkout}>
@@ -203,4 +205,10 @@ class Checkout extends Component {
     }
 }
 
-export default withRouter(Checkout);
+const mapStateToProps = state => {
+    return {
+        state: state
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Checkout));
