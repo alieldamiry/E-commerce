@@ -5,7 +5,7 @@ import { BsInfoSquareFill } from "react-icons/bs";
 
 const Product = (props) => {
 
-    let imageSource = require('../../assets/images/products/' + props.product.name + '.webp')
+    let imageSource = require('../../assets/images/products/' + props.product.name + '.jpg')
     return (
         <div className={classes.Product}>
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './Home.css';
-import imageSource from "../../assets/images/Chair.webp";
+import imageSource from "../../assets/images/Chair.png";
 
-
-const Home = (props) => {
+const Home = () => {
     return (
         <div className={classes.Home}>
             <div className={classes.Header}>
