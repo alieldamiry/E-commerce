@@ -5,7 +5,7 @@ import classes from './CartItem.css';
 
 
 const CartItem = (props) => {
-    const imageSource = require('../../assets/images/products/' + props.CartItem.name + '.webp');
+    const imageSource = require('../../assets/images/products/' + props.CartItem.name + '.jpg');
     return (
         <div className={[classes.CartItem, classes.Container].join(' ')}>
             <div className={classes.ImageContainer}>
