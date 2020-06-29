@@ -22,8 +22,8 @@ export const deleteItem = (item) => {
 
 export const changeQuantity = (event, item) => {
     return {
-        type:actionTypes.CHANGE_QUANTITY,
-        event:event,
-        item:item
+        type: actionTypes.CHANGE_QUANTITY,
+        event: event,
+        item: item
     }
 }

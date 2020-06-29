@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../redux/actions/actionCreators';
+import * as actions from '../../redux/actions/cart';
+import { fetchProducts } from '../../redux/actions/products';
 import classes from './Products.css';
 import Product from '../../components/Product/Product';
 import CartNotification from '../../components/CartNotification/CartNotification';
@@ -29,10 +30,12 @@ class Products extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
-            .then(res => {
-                this.setState({ productsStored: Object.values(res.data) });
-            });
+        console.log(this.props);
+        this.props.fetchProducts(this.props.Category);
+        // axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
+        //     .then(res => {
+        //         this.setState({ productsStored: Object.values(res.data) });
+        //     });
     }
     productClickedHandler = (product) => {
         this.setState({ productClicked: product, showProductModal: true });
@@ -43,11 +46,14 @@ class Products extends Component {
     }
 
     render() {
-        let products = null;
+        let products = <Spinner />;
+        if (this.props.error) {
+            products = <p>Can't load products</p>;
+        }
         let productsStyle = null;
-        if (this.state.productsStored) {
+        if (this.props.products && !this.props.loading) {
             productsStyle = classes.Products;
-            products = this.state.productsStored.map(product =>
+            products = this.props.products.map(product =>
                 <Product
                     addToCart={() => {
                         this.props.onAddToCart(product)
@@ -55,11 +61,9 @@ class Products extends Component {
                     }}
                     productModalClicked={() => { this.productClickedHandler(product) }}
                     product={product}
-                    key={product.name} />
-            );
-        } else {
-            products = <Spinner />;
+                    key={product.name} />);
         }
+
 
         return (
             <React.Fragment>
@@ -81,15 +85,17 @@ class Products extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onAddToCart: (product) => {
-            dispatch(actionCreators.addToCart(product))
-            dispatch(actionCreators.calculatePrice())
-        }
+            dispatch(actions.addToCart(product))
+            dispatch(actions.calculatePrice())
+        },
+        fetchProducts: (Category) => dispatch(fetchProducts(Category))
     }
 }
 const mapStateToProps = state => {
     return {
-        productsStored: state.productsStored,
-        orderedProducts: state.orderedProducts
+        products: state.products.products,
+        loading: state.products.loading,
+        error: state.products.error
     }
 }
 

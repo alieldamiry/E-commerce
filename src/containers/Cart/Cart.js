@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classes from './Cart.css';
 import CartItem from '../../components/CartItem/CartItem';
 import PriceSummary from '../../components/PriceSummary/PriceSummary';
-import * as actionCreators from '../../redux/actions/actionCreators';
+import * as actions from '../../redux/actions/cart';
 
 class Cart extends Component {
     render() {
@@ -37,20 +37,20 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
     return {
-        orderedProducts: state.orderedProducts,
-        totalPrice: state.totalPrice
+        orderedProducts: state.cart.orderedProducts,
+        totalPrice: state.cart.totalPrice
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         deleteItem: (item) => {
-            dispatch(actionCreators.deleteItem(item))
-            dispatch(actionCreators.calculatePrice())
+            dispatch(actions.deleteItem(item))
+            dispatch(actions.calculatePrice())
         },
         changeQuantity: (event, item) => {
-            dispatch(actionCreators.changeQuantity(event, item))
-            dispatch(actionCreators.calculatePrice())
+            dispatch(actions.changeQuantity(event, item))
+            dispatch(actions.calculatePrice())
         }
     }
 }

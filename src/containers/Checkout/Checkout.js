@@ -7,8 +7,8 @@ import { withRouter } from "react-router";
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Checkout extends Component {
-    componentDidMount(){
-        console.log(this.props);   
+    componentDidMount() {
+        console.log(this.props);
     }
     state = {
         orderForm: {
@@ -116,14 +116,14 @@ class Checkout extends Component {
 
         axios.post('https://e-commerce-9417b.firebaseio.com/orders.json', order)
             .then(res => {
+                console.log(res);
+                
                 this.setState({ loading: false });
                 this.props.history.push('/');
             }).catch(res => {
                 alert(res);
             });
     }
-
-
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -207,7 +207,7 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        state: state
+        state: state.cart
     }
 }
 
