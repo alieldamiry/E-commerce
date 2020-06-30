@@ -10,11 +10,13 @@ import thunk from 'redux-thunk';
 // import logger from 'redux-logger';
 import productsReducer from './redux/reducers/products';
 import cartReducer from './redux/reducers/cart';
+import ordersReducer from './redux/reducers/orders';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     products: productsReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    orders: ordersReducer
 })
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 const app = (

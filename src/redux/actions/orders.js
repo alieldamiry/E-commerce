@@ -27,7 +27,9 @@ const purchaseProductsFailed = error => {
 export const purchaseProducts = (order) => {
     return dispatch => {
         dispatch(purchaseProductsStart())
-        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json', order)
+        console.log(order);
+        
+        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json', order)
             .then(response => {
                 console.log(response);
                 dispatch(purchaseProductsSuccess());

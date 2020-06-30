@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import classes from './Checkout.css';
-import axios from 'axios';
-import { withRouter } from "react-router";
+// import axios from 'axios';
+import * as actions from '../../redux/actions/orders';
+// import { withRouter } from "react-router";
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Checkout extends Component {
@@ -92,13 +93,12 @@ class Checkout extends Component {
                 valid: true
             }
         },
-        formIsValid: false,
-        loading: false,
+        formIsValid: false
     }
     orderHandler = () => {
-        this.setState({ loading: true });
+        // this.setState({ loading: true });
         let orderedProducts = {};
-        this.props.state.orderedProducts.forEach(item =>
+        this.props.cart.orderedProducts.forEach(item =>
             orderedProducts[item.name] = {
                 price: item.price,
                 quantity: item.quantity
@@ -110,19 +110,10 @@ class Checkout extends Component {
         }
         const order = {
             orderedProducts: orderedProducts,
-            price: this.props.state.totalPrice + 0.1 * this.props.state.totalPrice,
+            price: this.props.cart.totalPrice + 0.1 * this.props.cart.totalPrice,
             orderData: formData
         }
-
-        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json', order)
-            .then(res => {
-                console.log(res);
-                
-                this.setState({ loading: false });
-                this.props.history.push('/');
-            }).catch(res => {
-                alert(res);
-            });
+        this.props.purchaseProducts(order);
     }
 
     checkValidity(value, rules) {
@@ -166,19 +157,22 @@ class Checkout extends Component {
                 config: this.state.orderForm[key],
             });
         }
-        let productsSummary = this.props.state.orderedProducts.map(item =>
+        let productsSummary = this.props.cart.orderedProducts.map(item =>
             <div key={item.name}>({item.quantity}) x {item.name}: <strong>{item.price * item.quantity}$</strong> </div>
         );
         let checkout = <Spinner />;
-        if (!this.state.loading) {
+        if (this.props.error) {
+            checkout = <p>Can't perform the request! please try again later</p>;
+        }
+        if (!this.props.loading) {
             checkout = <div className={classes.Checkout}>
                 <h4>Enter Your Contact Data</h4>
                 <div className={classes.orderSummary}>
                     <div className={classes.ProductsSummary}>
                         {productsSummary}
-                        <div>Tax (10%) : <strong>{(0.1 * this.props.state.totalPrice).toFixed(2)}$</strong></div>
+                        <div>Tax (10%) : <strong>{(0.1 * this.props.cart.totalPrice).toFixed(2)}$</strong></div>
                     </div>
-                    <div><strong>Total: {(0.1 * this.props.state.totalPrice + this.props.state.totalPrice).toFixed(2)}$</strong></div>
+                    <div><strong>Total: {(0.1 * this.props.cart.totalPrice + this.props.cart.totalPrice).toFixed(2)}$</strong></div>
                 </div>
                 <form onSubmit={this.orderHandler}>
                     {formElementsArray.map(formElement => (
@@ -205,10 +199,19 @@ class Checkout extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
     return {
-        state: state.cart
+        purchaseProducts: (order) => dispatch(actions.purchaseProducts(order))
     }
 }
 
-export default connect(mapStateToProps)(withRouter(Checkout));
+const mapStateToProps = state => {
+    return {
+        cart: state.cart,
+        loading: state.orders.loading,
+        error: state.orders.error
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
