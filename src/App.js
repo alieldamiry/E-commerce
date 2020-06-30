@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import classes from './App.css';
 import Layout from './containers/Layout/Layout';
 import Home from './containers/Home/Home';
-import Spinner from './components/UI/Spinner/Spinner';
+// import Spinner from './components/UI/Spinner/Spinner';
+import Orders from './containers/Orders/Orders'
 import Checkout from './containers/Checkout/Checkout';
 // const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
 import Cart from './containers/Cart/Cart';
@@ -28,7 +29,7 @@ class App extends Component {
             {routingCategories}
             <Route path="/cart" component={Cart} />
             <Route path='/checkout' component={Checkout} />
-            <Route path="/orders" component={Checkout} />
+            <Route path="/orders" component={Orders} />
             <Route path="/" component={Home} />
           </Switch>
         </Layout>

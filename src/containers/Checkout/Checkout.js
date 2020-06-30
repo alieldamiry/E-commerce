@@ -95,11 +95,13 @@ class Checkout extends Component {
         },
         formIsValid: false
     }
-    orderHandler = () => {
+    orderHandler = (event) => {
+        event.preventDefault();
         // this.setState({ loading: true });
         let orderedProducts = {};
         this.props.cart.orderedProducts.forEach(item =>
             orderedProducts[item.name] = {
+                name: item.name,
                 price: item.price,
                 quantity: item.quantity
             });
@@ -110,7 +112,7 @@ class Checkout extends Component {
         }
         const order = {
             orderedProducts: orderedProducts,
-            price: this.props.cart.totalPrice + 0.1 * this.props.cart.totalPrice,
+            totalPrice: this.props.cart.totalPrice + 0.1 * this.props.cart.totalPrice,
             orderData: formData
         }
         this.props.purchaseProducts(order);
