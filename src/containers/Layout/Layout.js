@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import { connect } from 'react-redux';
 import Toolbar from '../../components/navigation/Toolbar/Toolbar';
 import classes from './Layout.css'
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
@@ -24,12 +25,15 @@ class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
+                <Toolbar
+                    isAuth={this.props.isAuthenticated}
+                    drawerToggleClicked={this.sideDrawerToggleHandler} />
                 <Suspense fallback={<Spinner />}>
-                    <SideDrawer open={this.state.showSideDrawer}
+                    <SideDrawer
+                        isAuth={this.props.isAuthenticated}
+                        open={this.state.showSideDrawer}
                         closed={this.sideDrawerToggleHandler} />
                 </Suspense>
-
                 <main className={classes.Content}>
                     {this.props.children}
                     <div className={classes.Footer}>
@@ -58,4 +62,10 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    }
+}
+
+export default connect(mapStateToProps)(Layout);

@@ -8,6 +8,7 @@ import Orders from './containers/Orders/Orders'
 import Checkout from './containers/Checkout/Checkout';
 // const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
 import Cart from './containers/Cart/Cart';
+import Auth from './containers/Auth/Auth';
 // const Cart = React.lazy(() => import('./containers/Cart/Cart'));
 import Products from './containers/Products/Products';
 // const Products = React.lazy(() => import('./containers/Products/Products'));
@@ -28,6 +29,7 @@ class App extends Component {
           <Switch>
             {routingCategories}
             <Route path="/cart" component={Cart} />
+            <Route path="/login" component={Auth} />
             <Route path='/checkout' component={Checkout} />
             <Route path="/orders" component={Orders} />
             <Route path="/" component={Home} />

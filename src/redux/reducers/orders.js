@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     fetchedOrders: null,
     loading: false,
-    error: false
+    error: null
 }
 
 const purchaseProductsStart = (state, action) => {
@@ -21,9 +21,11 @@ const purchaseProductsSuccess = (state, action) => {
 }
 
 const purchaseProductsFailed = (state, action) => {
+    console.log(action.error);
+    
     return {
         ...state,
-        loading: true,
+        loading: false,
         error: action.error
     }
 }
@@ -38,8 +40,6 @@ const fetchOrdersStart = (state, action) => {
 
 const fetchOrdersSuccess = (state, action) => {
     let updatedOrders = Object.values(action.fetchedOrders);
-    console.log(updatedOrders);
-
     return {
         ...state,
         loading: false,

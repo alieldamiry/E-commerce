@@ -17,13 +17,11 @@ class Orders extends Component {
             let updatedOrders = this.props.fetchedOrders.map(el => {
                 return {
                     products: Object.values(el.orderedProducts),
-                    totalPrice: el.totalPrice
+                    totalPrice: el.totalPrice,
+                    key: el.id
                 }
             })
-            console.log(updatedOrders);
-            // Object.keys(el.orderedProducts) 
-            // console.log(Object.keys(this.props.fetchedOrders[0].orderedProducts))
-            orders = updatedOrders.map(p => <Order order={p} />);
+            orders = updatedOrders.map(p => <Order key={p.key} order={p} />);
         }
         return (
             <div>

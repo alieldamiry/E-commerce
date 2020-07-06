@@ -11,12 +11,14 @@ import thunk from 'redux-thunk';
 import productsReducer from './redux/reducers/products';
 import cartReducer from './redux/reducers/cart';
 import ordersReducer from './redux/reducers/orders';
+import authReducer from './redux/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     products: productsReducer,
     cart: cartReducer,
-    orders: ordersReducer
+    orders: ordersReducer,
+    auth: authReducer
 })
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 const app = (

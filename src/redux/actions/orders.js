@@ -21,15 +21,16 @@ const purchaseProductsFailed = error => {
 
 
 export const purchaseProducts = (order) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(purchaseProductsStart())
-        console.log(order);
-        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json', order)
+        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json?auth='+getState().auth.token, order)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
                 dispatch(purchaseProductsSuccess());
-            }).catch(error => {
-                dispatch(purchaseProductsFailed(error))
+            }).catch(err => {
+                console.log(err.response.data.error);
+                
+                dispatch(purchaseProductsFailed(err))
             })
     }
 }
@@ -57,13 +58,22 @@ const fetchOrdersFailed = error => {
 }
 
 export const fetchOrders = () => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(fetchOrdersStart())
-        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json')
-            .then(response => {
-                // console.log(response);
-                dispatch(fetchOrdersSuccess(response.data));
-            }).catch(error => {
+
+        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json?auth=' + getState().auth.token)
+            .then(res => {
+                // console.log(res.data);
+                const fetchedOrders = [];
+                for (let key in res.data) {
+                    fetchedOrders.push({
+                        ...res.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchOrdersSuccess(fetchedOrders));
+            })
+            .catch(error => {
                 dispatch(fetchOrdersFailed(error))
             })
     }
