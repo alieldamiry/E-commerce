@@ -1,14 +1,13 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/cart';
 import { fetchProducts } from '../../redux/actions/products';
 import classes from './Products.css';
 import Product from '../../components/Product/Product';
 import CartNotification from '../../components/CartNotification/CartNotification';
-import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
-// import ProductModal from '../UI/ProductModal/ProductModal';
-const ProductModal = React.lazy(() => import('../../components/UI/ProductModal/ProductModal'));
+import ProductModal from '../../components/UI/ProductModal/ProductModal';
+// const ProductModal = React.lazy(() => import('../../components/UI/ProductModal/ProductModal'));
 
 
 class Products extends Component {
@@ -67,12 +66,10 @@ class Products extends Component {
 
         return (
             <React.Fragment>
-                <Suspense fallback={<Spinner />}>
-                    <ProductModal
-                        closeProductModal={this.closeProductModalHandler}
-                        show={this.state.showProductModal}
-                        product={this.state.productClicked} />
-                </Suspense>
+                <ProductModal
+                    closeProductModal={this.closeProductModalHandler}
+                    show={this.state.showProductModal}
+                    product={this.state.productClicked} />
                 <div className={productsStyle}>
                     <CartNotification notificationState={this.state.cartNotification} closeNotification={this.closeCartNotification} />
                     {products}

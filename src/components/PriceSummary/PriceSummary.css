@@ -12,6 +12,8 @@
 .ProceedToCheckout {
     box-sizing: border-box;
     text-decoration: none;
+    border-style: none;
+    outline: none;
     font-size: 17px;
     font-weight: bold;
     background-color: #91CE3F;

@@ -99,6 +99,9 @@ class Checkout extends Component {
     }
     orderHandler = (event) => {
         event.preventDefault();
+        if(!this.props.isAuthenticated){
+            this.props.history.push('/auth')
+        }
         let orderedProducts = {};
         this.props.cart.orderedProducts.forEach(item =>
             orderedProducts[item.name] = {
@@ -117,6 +120,7 @@ class Checkout extends Component {
             orderData: formData
         }
         this.props.purchaseProducts(order);
+
     }
 
     checkValidity(value, rules) {
@@ -206,9 +210,11 @@ class Checkout extends Component {
                             touched={formElement.config.touched}
                             changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                     ))}
-                    <button className={classes.OrderButton} disabled={!this.state.formIsValid}>ORDER</button>
+                    <button
+                        className={classes.OrderButton}
+                        disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'ORDER' : 'SIGNUP TO ORDER'}</button>
                 </form>
-            </div >;
+            </div >
         }
 
         return (
@@ -229,8 +235,8 @@ const mapStateToProps = state => {
     return {
         cart: state.cart,
         loading: state.orders.loading,
-        error: state.orders.error
-
+        error: state.orders.error,
+        isAuthenticated: state.auth.token !== null
     }
 }
 

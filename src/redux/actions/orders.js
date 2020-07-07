@@ -23,13 +23,12 @@ const purchaseProductsFailed = error => {
 export const purchaseProducts = (order) => {
     return (dispatch, getState) => {
         dispatch(purchaseProductsStart())
-        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json?auth='+getState().auth.token, order)
+        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json?auth=' + getState().auth.token, order)
             .then(response => {
                 console.log(response.data);
                 dispatch(purchaseProductsSuccess());
             }).catch(err => {
                 console.log(err.response.data.error);
-                
                 dispatch(purchaseProductsFailed(err))
             })
     }
