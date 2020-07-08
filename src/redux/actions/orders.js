@@ -15,7 +15,8 @@ const purchaseProductsSuccess = () => {
 
 const purchaseProductsFailed = error => {
     return {
-        type: actionTypes.PURCHASE_PRODUCTS_FAILED
+        type: actionTypes.PURCHASE_PRODUCTS_FAILED,
+        error: error
     }
 }
 
@@ -28,8 +29,8 @@ export const purchaseProducts = (order) => {
                 console.log(response.data);
                 dispatch(purchaseProductsSuccess());
             }).catch(err => {
-                console.log(err.response.data.error);
-                dispatch(purchaseProductsFailed(err))
+                console.log(err);
+                dispatch(purchaseProductsFailed('error'))
             })
     }
 }
@@ -59,8 +60,8 @@ const fetchOrdersFailed = error => {
 export const fetchOrders = () => {
     return (dispatch, getState) => {
         dispatch(fetchOrdersStart())
-
-        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json?auth=' + getState().auth.token)
+        const queryParams = '?auth=' + getState().auth.token + '&orderBy="userId"&equalTo="' + getState().auth.userId + '"';
+        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json' + queryParams)
             .then(res => {
                 // console.log(res.data);
                 const fetchedOrders = [];

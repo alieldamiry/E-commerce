@@ -1,5 +1,7 @@
-import React, { Component, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './redux/actions/auth';
 import classes from './App.css';
 import Layout from './containers/Layout/Layout';
 import Home from './containers/Home/Home';
@@ -15,7 +17,9 @@ import Products from './containers/Products/Products';
 // const Products = React.lazy(() => import('./containers/Products/Products'));
 
 class App extends Component {
-
+  componentDidMount() {
+    this.props.onTryAutoSignUp();
+  }
   render() {
     const categories = ['fashion', 'electronics'];
     const routingCategories = categories.map(c =>
@@ -42,4 +46,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignUp: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App));

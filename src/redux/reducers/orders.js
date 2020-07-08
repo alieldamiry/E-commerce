@@ -9,14 +9,16 @@ const initialState = {
 const purchaseProductsStart = (state, action) => {
     return {
         ...state,
-        loading: true
+        loading: true,
+        error:null
     }
 }
 
 const purchaseProductsSuccess = (state, action) => {
     return {
         ...state,
-        loading: false
+        loading: false,
+        
     }
 }
 
@@ -35,6 +37,7 @@ const fetchOrdersStart = (state, action) => {
     return {
         ...state,
         loading: true,
+        error:null
     }
 }
 

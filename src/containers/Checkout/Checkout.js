@@ -99,7 +99,7 @@ class Checkout extends Component {
     }
     orderHandler = (event) => {
         event.preventDefault();
-        if(!this.props.isAuthenticated){
+        if (!this.props.isAuthenticated) {
             this.props.history.push('/auth')
         }
         let orderedProducts = {};
@@ -117,7 +117,8 @@ class Checkout extends Component {
         const order = {
             orderedProducts: orderedProducts,
             totalPrice: this.props.cart.totalPrice + 0.1 * this.props.cart.totalPrice,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         }
         this.props.purchaseProducts(order);
 
@@ -188,7 +189,7 @@ class Checkout extends Component {
         if (this.props.error) {
             checkout = <p>Can't perform the request! please try again later</p>;
         }
-        if (!this.props.loading) {
+        if (!this.props.loading && !this.props.error) {
             checkout = <div className={classes.Checkout}>
                 <h4>Enter Your Contact Data</h4>
                 <div className={classes.orderSummary}>
@@ -236,7 +237,8 @@ const mapStateToProps = state => {
         cart: state.cart,
         loading: state.orders.loading,
         error: state.orders.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        userId: state.auth.userId
     }
 }
 

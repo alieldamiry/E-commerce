@@ -9,7 +9,8 @@ const initialState = {
 const fetchProductsStart = (state, action) => {
     return {
         ...state,
-        loading: true
+        loading: true,
+        error:null
     }
 }
 const fetchProductsSuccess = (state, action) => {
