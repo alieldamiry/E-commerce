@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../axios-orders';
 
 const purchaseProductsStart = () => {
     return {
@@ -24,7 +24,7 @@ const purchaseProductsFailed = error => {
 export const purchaseProducts = (order) => {
     return (dispatch, getState) => {
         dispatch(purchaseProductsStart())
-        axios.post('https://e-commerce-9417b.firebaseio.com/orders.json?auth=' + getState().auth.token, order)
+        axios.post('/orders.json?auth=' + getState().auth.token, order)
             .then(response => {
                 console.log(response.data);
                 dispatch(purchaseProductsSuccess());
@@ -61,7 +61,7 @@ export const fetchOrders = () => {
     return (dispatch, getState) => {
         dispatch(fetchOrdersStart())
         const queryParams = '?auth=' + getState().auth.token + '&orderBy="userId"&equalTo="' + getState().auth.userId + '"';
-        axios.get('https://e-commerce-9417b.firebaseio.com/orders.json' + queryParams)
+        axios.get('/orders.json' + queryParams)
             .then(res => {
                 // console.log(res.data);
                 const fetchedOrders = [];

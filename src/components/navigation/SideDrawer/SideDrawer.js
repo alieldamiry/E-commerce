@@ -9,11 +9,11 @@ const sideDrawer = (props) => {
     if (props.open) {
         attachedClasses = [classes.SideDrawer, classes.Open];
     }
-    
+
     return (
         <React.Fragment>
-            <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(' ')}>
+            <Backdrop show={props.open} clicked={props.closed} />
+            <div className={attachedClasses.join(' ')} onClick={props.closed}>
                 <div className={classes.Logo}>
                     <Logo />
                 </div>

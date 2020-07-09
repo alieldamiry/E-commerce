@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../axios-orders';
 
 const fetchProductsStart = () => {
     return {
@@ -25,7 +25,7 @@ const fetchProductsFalied = error => {
 export const fetchProducts = (Category) => {
     return dispatch => {
         dispatch(fetchProductsStart())
-        axios.get('https://e-commerce-9417b.firebaseio.com/products/' + Category + '.json')
+        axios.get('/products/' + Category + '.json')
             .then(res => {
                 dispatch(fetchProductsSuccess(Object.values(res.data)));
                 // this.setState({ productsStored: Object.values(res.data) });
