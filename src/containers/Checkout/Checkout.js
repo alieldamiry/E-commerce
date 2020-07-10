@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import classes from './Checkout.css';
@@ -154,39 +156,35 @@ class Checkout extends Component {
         let productsSummary = this.props.cart.orderedProducts.map(item =>
             <div key={item.name}>({item.quantity}) x {item.name}: <strong>{item.price * item.quantity}$</strong> </div>
         );
-        let checkout = <Spinner />;
-        if (this.props.error) {
-            checkout = <p>Can't perform the request! please try again later</p>;
-        }
-        if (!this.props.loading && !this.props.error) {
-            checkout = <div className={classes.Checkout}>
-                <h4>Enter Your Contact Data</h4>
-                <div className={classes.orderSummary}>
-                    <div className={classes.ProductsSummary}>
-                        {productsSummary}
-                        <div>Tax (10%) : <strong>{(0.1 * this.props.cart.totalPrice).toFixed(2)}$</strong></div>
-                    </div>
-                    <div><strong>Total: {(0.1 * this.props.cart.totalPrice + this.props.cart.totalPrice).toFixed(2)}$</strong></div>
+        let checkout = <div className={classes.Checkout}>
+            <h4>Enter Your Contact Data</h4>
+            <div className={classes.orderSummary}>
+                <div className={classes.ProductsSummary}>
+                    {productsSummary}
+                    <div>Tax (10%) : <strong>{(0.1 * this.props.cart.totalPrice).toFixed(2)}$</strong></div>
                 </div>
-                <form onSubmit={this.orderHandler}>
-                    {formElementsArray.map(formElement => (
-                        <Input
-                            key={formElement.id}
-                            elementType={formElement.config.elementType}
-                            elementConfig={formElement.config.elementConfig}
-                            value={formElement.config.value}
-                            invalid={!formElement.config.valid}
-                            shouldValidate={formElement.config.validation}
-                            touched={formElement.config.touched}
-                            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                    ))}
-                    <button
-                        className={classes.OrderButton}
-                        disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'ORDER' : 'SIGNUP TO ORDER'}</button>
-                </form>
-            </div >
+                <div><strong>Total: {(0.1 * this.props.cart.totalPrice + this.props.cart.totalPrice).toFixed(2)}$</strong></div>
+            </div>
+            <form onSubmit={this.orderHandler}>
+                {formElementsArray.map(formElement => (
+                    <Input
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                ))}
+                <button
+                    className={classes.OrderButton}
+                    disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'ORDER' : 'SIGNUP TO ORDER'}</button>
+            </form>
+        </div >
+        if (this.props.loading) {
+            checkout = <Spinner />;
         }
-
         return (
             <React.Fragment>
                 {checkout}
@@ -211,4 +209,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Checkout, axios));

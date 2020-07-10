@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { fetchOrders } from '../../redux/actions/orders'
 import { connect } from 'react-redux';
 import Order from '../../components/Order/Order';
@@ -45,4 +47,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

@@ -28,7 +28,6 @@ export const fetchProducts = (Category) => {
         axios.get('/products/' + Category + '.json')
             .then(res => {
                 dispatch(fetchProductsSuccess(Object.values(res.data)));
-                // this.setState({ productsStored: Object.values(res.data) });
             }).catch(error => {
                 dispatch(fetchProductsFalied(error))
             })

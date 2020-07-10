@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actions from '../../redux/actions/cart';
 import { fetchProducts } from '../../redux/actions/products';
 import classes from './Products.css';
@@ -31,10 +33,6 @@ class Products extends Component {
     componentDidMount() {
         console.log(this.props);
         this.props.fetchProducts(this.props.Category);
-        // axios.get('https://e-commerce-9417b.firebaseio.com/products/' + this.props.Category + '.json')
-        //     .then(res => {
-        //         this.setState({ productsStored: Object.values(res.data) });
-        //     });
     }
     productClickedHandler = (product) => {
         this.setState({ productClicked: product, showProductModal: true });
@@ -45,10 +43,7 @@ class Products extends Component {
     }
 
     render() {
-        let products = <Spinner />;
-        if (this.props.error) {
-            products = <p>Can't load products</p>;
-        }
+        let products = this.props.error ? <p>Can't load products</p> : <Spinner />;
         let productsStyle = null;
         if (this.props.products && !this.props.loading) {
             productsStyle = classes.Products;
@@ -96,4 +91,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Products, axios));
