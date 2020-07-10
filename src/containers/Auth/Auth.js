@@ -90,7 +90,7 @@ class Auth extends Component {
 
         let errorMessage = null;
         if (this.props.error) {
-            errorMessage = <p>{this.props.error.message}</p>
+            errorMessage = <p style={{ color: 'red' }}>{this.props.error.message}</p>
         }
 
         let authRedirect = null;
