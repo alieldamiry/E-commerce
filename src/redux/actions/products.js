@@ -21,7 +21,6 @@ const fetchProductsFalied = error => {
     }
 }
 
-
 export const fetchProducts = (Category) => {
     return dispatch => {
         dispatch(fetchProductsStart())
