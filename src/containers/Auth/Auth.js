@@ -100,14 +100,19 @@ const Auth = props => {
 
     return (
         <div className={classes.Auth}>
+            <h2 style={{ 'color': '#3D9BD1' }}>{isSignup ? 'SIGN UP' : 'SIGN IN'}</h2>
+            {!isSignup ? <div>
+                <p>email: test@test.com</p>
+                <p>password: 111111</p>
+            </div> : null}
             {authRedirect}
             {errorMessage}
             <form onSubmit={submitHandler}>
                 {form}
-                <button className={classes.Btn}>{isSignup ? 'SIGNUP' : 'SIGNIN'}</button>
+                <button className={classes.Btn}>{isSignup ? 'SIGN UP' : 'SIGN IN'}</button>
             </form>
             <button onClick={switchAuthModeHandler} className={[classes.Btn, classes.red].join(' ')}>
-                SWITCH TO {isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
+                SWITCH TO {isSignup ? 'SIGN IN' : 'SIGN UP'}</button>
         </div>
     );
 }

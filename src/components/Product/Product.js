@@ -8,7 +8,6 @@ const Product = (props) => {
     let imageSource = require('../../assets/images/products/' + props.product.name + '.jpg')
     return (
         <div className={classes.Product}>
-
             <img className={classes.img} src={imageSource} alt={props.product.name} />
             <div className={classes.naming}>
                 <p>{props.product.name}</p>

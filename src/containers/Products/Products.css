@@ -1,19 +1,17 @@
-@media (max-width:600px) {
-    .Products {
-        margin: 0 auto;
-        width: auto;
-        height: auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
+.Products {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
-@media (min-width:800px) {
+@media (min-width:790px) {
     .Products {
         margin: auto;
         width: auto;
         height: auto;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 }
